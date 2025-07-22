@@ -21,17 +21,17 @@ O sistema simula o atendimento de emergências (como SAMU, Bombeiros e Polícia)
 
 ## 🧩 Funcionalidades Implementadas
 
-### ✅ Fase 1 – Simulação Básica
+### – Simulação Básica
 - Cadastro de bairros (usando hashing)
 - Cadastro de unidades de serviço (ambulância, polícia, etc.)
 - Simulação de **filas** de atendimento por ordem de chegada
 
-### ✅ Fase 2 – Histórico e Busca
+### – Histórico e Busca
 - Armazenamento de histórico de atendimentos com **pilhas**
 - Busca rápida de cidadãos e bairros com hashing
 - Representação da cidade com **listas cruzadas** entre bairros e serviços
 
-### ✅ Fase 3 – Priorização Inteligente
+### – Priorização Inteligente
 - Inserção de chamados em uma **árvore binária de busca** (BST)
 - Priorização automática por gravidade usando **árvore AVL**
 - Substituição de buscas sequenciais por estruturas balanceadas
@@ -51,8 +51,3 @@ O sistema simula o atendimento de emergências (como SAMU, Bombeiros e Polícia)
 
 ---
 
-## 🛠️ Como Executar
-
-1. Faça o clone ou download do projeto:
-   ```bash
-   git clone https://github.com/seu-usuario/trabalho-ed1-2025.git
