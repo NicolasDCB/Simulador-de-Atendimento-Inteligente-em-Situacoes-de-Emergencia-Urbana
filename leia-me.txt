@@ -1,0 +1,96 @@
+Essa parte seguirá de tal forma:
+    - Criação de um TAD contendo todas estruturas.
+        - Estrutura de bairro: será armazenada com um Hash. A função será ID % TAM_TABELA. Veja
+que o tratamento de colisões será feito de forma dinâmica (é a melhor forma nesse caso).
+    - Fila de ocorrências: lembrar que a ocorrência de maior prioridade tem que estar no começo para sair primeiro. A função processaOcorrencias foi tirada do GPT msm.
+    - Menu: está no "teste.c". É bem tranquilo de implementar e como o código vai mudar bastante daqui pra frente, resolvi não por no TAD.
+
+
+
+
+Coisas para apagar:
+    O indice da função exibirCadastroDeBairros.
+
+Simulação:
+    Será feita através de "rand". Para cada valor, terá uma ação. Terá um número fixo de vezes que essa aleatoriedade irá ser repetir.
+    Haverá serviços mínimos, independente da aleatoriedade da simulação. Logo, terá 1 serviço de cada, pelo menos 1 pessoa e 1 bairro registrado.
+    Na forma automática, tudo é lido de TXT's e colocados automaticamente.
+
+
+PARTE 2:
+    - Inserção da pilha de ocorrencias: nos dirá todas as ocorrencias que foram colocadas na fila com prioridade. As funções novas que implementam a pilha
+    são:
+        - void push(struct Pilha *p, struct Ocorrencia *ptr); //Alteração dos tipos
+        - void inicializa(struct Pilha *p);
+        - int vazia(struct Ocorrencia *p);
+        - void esvazia(struct Pilha *p);
+        - void imprimePilha(struct Pilha *p);
+        - void exibeOcorrencia(struct Ocorrencia *p); /* Para exibir a ocorrencia selecionada no imprimePilha. */
+        - Além da estrutura pilha.
+
+    - Inclusão de funções hashing que vão fazer a busca e inclusão de cidadões, além de declarar a tabela hashing no cabeçalho.
+        - int funcaoHash(char* cpf): Função hash que serve para o cod hash cpf como parametro.
+        - void inserirNaHash(Cidadao* novo): Vai inseriri na tabela hash usando a funçãoHash.
+        - Cidadao* buscarPorCPF(char* cpf): Busca cpf atraves da funcao hash.
+        - void buscarCidadaoCPF(): Realiza a busca do cidadão utilizando a tabela hashing.
+        - void buscarPorId(): criado apenas uma função para busca por id de bairro.
+        - struct Bairro* buscarBairroPorID(int id): Busca o bairro atraves do id utilizando a tabela hashing dele propria.
+
+    - Modificações:
+        - limparTudo: agora recebe um parâmetro pilha (que contém o topo da pilha) para limpar.
+        - registrarOcorrencia: agora retorna um ponteiro para a mais nova ocorrencia. Facilita na hora de colocar na pilha.
+        - simulacao: receba uma pilha da main. Essa pilha da main que será usada.
+        - exibirTudo: recebe pilha como parâmetro. Precisa para imprimir.
+        - Nova opção no menu da main: agora podemos ver a pilha de ocorrencias como histórico de ocorrencias.
+        - Alterações do teste, adicionando novas opções na busca de cidadão e bairro, nos cases 6 e 7.
+        - Ids na simulação usam rand() agora.
+
+
+PARTE 3:
+
+	Para organizar as chamadas por um identificador ou pelo horário em que foram registradas, utilizei uma Árvore Binária de Busca (BST).
+ Ela ajuda a manter tudo em ordem e facilita encontrar o que você procura.E para as chamadas que são realmente urgentes, que precisam de atenção imediata, adicionei uma Árvore AVL.
+ A grande vantagem dessa estrutura é que ela se mantém sempre balanceada, garantindo que as ocorrências mais importantes sejam acessadas rapidamente e sem atrasos.
+ Basicamente, substituí as buscas lentas por métodos muito mais ágeis e eficientes, tudo graças a essas novas estruturas de dados. O sistema agora opera de forma bem mais otimizada.
+
+  inserirBST(raiz, novaOcorrencia, ordenarPor): Esta função coloca uma nova ocorrência na sua Árvore BST. Você escolhe se ela vai se organizar por ID ou por horário de chamada.
+
+  percursoEmOrdemBST(raiz): Com esta função, você consegue ver todas as ocorrências da sua BST em ordem, seja por ID ou por horário, dependendo de como você as inseriu.
+
+  buscarBST(raiz, id): Ela serve para encontrar uma ocorrência específica na BST usando o ID dela. Bem rápido para achar o que precisa.
+
+  inserirAVL(no, novaOcorrencia): Esta função adiciona uma nova ocorrência na sua Árvore AVL. O legal é que ela já se arruma sozinha (se auto-balanceia) para ficar sempre eficiente.
+
+  percursoEmOrdemAVL(raiz): Usando esta função, você lista todas as ocorrências da sua Árvore AVL, organizadas pela gravidade delas.
+
+  buscarAVL(no, gravidadeBusca): Esta é para achar uma ocorrência específica na AVL pela gravidade dela. Ideal para identificar as mais urgentes rapidinho.
+
+
+  if (buscarBairroPorID(idBairro) == NULL && totalBairro > 0) {
+                cadastrarBairro(idBairro, bairros[idBairro]);
+            } else if (totalBairro == 0) {
+                idBairro = idsBairros++;
+                cadastrarBairro(idBairro, "Bairro Generico");
+            }
+
+if (buscarBairroPorID(idBairro) == NULL && totalBairro > 0) {
+                cadastrarBairro(idBairro, bairros[idBairro]);
+            } else if (totalBairro == 0) {
+                idBairro = idsBairros++;
+                cadastrarBairro(idBairro, "Bairro Generico");
+            }
+
+if (buscarBairroPorID(idBairro) == NULL && totalBairro > 0) {
+                cadastrarBairro(idBairro, bairros[idBairro]);
+            } else if (totalBairro == 0) {
+                idBairro = idsBairros++;
+                cadastrarBairro(idBairro, "Bairro Generico");
+            }
+
+
+if (buscarBairroPorID(idBairro) == NULL && totalBairro > 0) { // Se o bairro nao existe e temos dados carregados
+                cadastrarBairro(idBairro, bairros[idBairro]); // Cadastra o bairro se nao existe
+            } else if (totalBairro == 0) { // Se nao houver bairros carregados, usa um ID fixo ou gera um novo
+                idBairro = idsBairros++;
+                cadastrarBairro(idBairro, "Bairro Generico"); // Cadastra um bairro generico
+            }
